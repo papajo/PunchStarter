@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, abort
 from flask.ext.script import Manager
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.migrate import Migrate, MigrateCommand
@@ -14,10 +14,12 @@ manager.add_command('db', MigrateCommand)
 
 from punchstarter.models import *
 
+#index route
 @app.route("/")
 def hello():
     return render_template("index.html")
 
+#create a new project route
 @app.route("/projects/create/", methods=['GET', 'POST'])
 def create():
     if request.method == 'GET':
@@ -37,7 +39,16 @@ def create():
             time_created = now
         )
 
-        db.session.add(new_project)
-        db.session.commit()
+    db.session.add(new_project)
+    db.session.commit()
 
-        return redirect(url_for('create'))
+    return redirect(url_for('create'))
+
+#goto a specific project route
+@app.route("/projects/<int:project_id>/")
+def projet_detail(project_id):
+    project = db.session.query(Project).get(project_id)
+    if project is None:
+        abort(404)
+
+    return render_template('project_detail.html', project=project)
