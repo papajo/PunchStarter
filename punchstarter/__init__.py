@@ -16,3 +16,7 @@ from punchstarter.models import *
 @app.route("/")
 def hello():
     return render_template("index.html")
+
+@app.route("/projects/create/")
+def create():
+    return render_template("create.html")
