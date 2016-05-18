@@ -41,6 +41,12 @@
             <li {% if active_page == 'index' %} class="active" {% endif %}><a href="/">Home</a></li>
             <li {% if active_page == 'create' %} class="active" {% endif %}><a href="{{ url_for('create') }}">Create a Project</a></li>
           </ul>
+          <form role="search" class="navbar-form navbar-right" action="{{ url_for('search') }}">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search Projects" name="q">
+            </div>
+            <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+          </form>
         </div><!--/.nav-collapse -->
       </div>
     </nav>

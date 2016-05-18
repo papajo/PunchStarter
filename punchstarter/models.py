@@ -42,6 +42,10 @@ class Project(db.Model):
         return num_days_left
 
     @property
+    def percentage_funded(self):
+    	return int(self.total_pledges  * 100 / self.goal_amount)
+
+    @property
     def image_path(self):
         return cloudinary.utils.cloudinary_url(self.image_filename)[0]
 
