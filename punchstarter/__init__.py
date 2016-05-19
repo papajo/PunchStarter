@@ -18,7 +18,8 @@ from punchstarter.models import *
 #index route
 @app.route("/")
 def hello():
-    return render_template("index.html")
+    projects = db.session.query(Project).order_by(Project.time_created.desc()).limit(10)
+    return render_template("index.html", projects=projects)
 
 #create a new project route
 @app.route("/projects/create/", methods=['GET', 'POST'])
