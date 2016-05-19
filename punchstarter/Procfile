@@ -1,1 +1,2 @@
-web:gunicorn punchstartr:app
+web: ngunicorn punchstartr:app
+worker: python worker.py
