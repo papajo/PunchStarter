@@ -1,1 +1,1 @@
-web: gunicorn punchstartr:app
+web: gunicorn punchstarter:app
