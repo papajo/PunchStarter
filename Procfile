@@ -1,2 +1,1 @@
-web: gunicorn punchstartr:app
-worker: python worker.py
+web: gunicorn punchstartr.wsgi --log-file -
