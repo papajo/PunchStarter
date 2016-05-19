@@ -1,1 +1,1 @@
-web: gunicorn punchstartr.wsgi --log-file -
+web: gunicorn punchstartr:app
