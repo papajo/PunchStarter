@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, abort
 from flask.ext.script import Manager
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.migrate import Migrate, MigrateCommand
+from flask.ext.security import Security, SQLAlchemyUserDatastore
 import datetime
 import cloudinary.uploader
 
@@ -14,6 +15,9 @@ migrate = Migrate(app, db)
 manager.add_command('db', MigrateCommand)
 
 from punchstarter.models import *
+#Setup Flask security
+user_datastore = SQLAlchemyUserDatastore(db, Member, Role)
+security = Security(app, user_datastore)
 
 #index route
 @app.route("/")
